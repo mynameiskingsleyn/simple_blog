@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers;
-
+use App\Post;
 class PagesController extends Controller
 {
   // about page action
 
   public function getAbout(){
     $name = "Kingsley N";
-  
+
     return view('pages.about')->withName($name);
   }
   // contact page action
@@ -21,7 +21,8 @@ class PagesController extends Controller
   }
   // index action
   public function getIndex(){
-    return view('pages.welcome');
+    $posts = Post::orderBy('updated_at','desc')->limit(4)->get();
+    return view('pages.welcome')->withPosts($posts);
   }
 
 }
