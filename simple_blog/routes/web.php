@@ -15,3 +15,5 @@ Route::get('/', 'PagesController@getIndex')->name('index');
 Route::get('/about', 'PagesController@getAbout')->name('about');
 Route::get('/contact', 'PagesController@getContact')->name('contact');
 Route::Resource('posts','PostController');
+// routes with slug.....
+Route::get('blog/{slug}',['as'=>'blog.single']);

@@ -19,7 +19,7 @@
         </div>
       <hr>
       @endforeach
-      @if(count($post) ==  0)
+      @if(count($posts) ==  0)
       <h3> Sample Posts </h3>
 
           <div class="post">
@@ -59,6 +59,9 @@
         </div>
 
   </div>
-</div>
 
+</div>
+<div class="text-center">
+  {!! $posts->links() !!}
+</div>
 @endsection

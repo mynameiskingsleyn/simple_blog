@@ -22,36 +22,22 @@
 
        </ul>
        <ul class="nav navbar-nav navbar-right">
-          <li>
-              <a href="{{route('posts.create')}}" class="{{Route::current()->getName() == "posts.create" ?"my_active":""}}">Create Post</a>
-          </li>
-          <li>
-              <a href="{{route('posts.index')}}" class="{{Route::current()->getName() == "posts.index" ?"my_active":""}}">Posts</a>
-          </li>
-         @guest
-
-         @else
              <li class="dropdown">
 
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                     {{ Auth::user()->name }} <span class="caret"></span>
+                     My Account <span class="caret"></span>
                  </a>
 
                  <ul class="dropdown-menu">
-                     <li>
-                         <a href="{{ route('logout') }}"
-                             onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                             Logout
-                         </a>
-
-                    <!--     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                             {{ csrf_field() }}
-                         </form> -->
-                     </li>
+                   <li>
+                       <a href="{{route('posts.create')}}" class="{{Route::current()->getName() == "posts.create" ?"my_active":""}}">Create Post</a>
+                   </li>
+                   <li>
+                       <a href="{{route('posts.index')}}" class="{{Route::current()->getName() == "posts.index" ?"my_active":""}}">Posts</a>
+                   </li>
                  </ul>
              </li>
-         @endguest
+
 
        </ul>
 

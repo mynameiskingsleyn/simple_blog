@@ -9,13 +9,17 @@
     </div>
     <div class="col-md-4">
       <div class="well">
+        <dl class="dl-horizontal">
+          <label> URL: </label>
+          <p> <a href="{{ route('blog.single',$post->slug) }}">{{ url('blog/'.$post->slug) }}</a></p>
+        </dl>
           <dl class="dl-horizontal">
-            <dt> Created At: </dt>
-            <dd> {{ date('d-M-Y',strtotime($post->created_at)) }}</dd>
+            <label> Created At: </label>
+            <p> {{ date('d-M-Y',strtotime($post->created_at)) }}</p>
           </dl>
           <dl class="dl-horizontal">
-            <dt> Updated : </dt>
-            <dd> {{ $post->updated_at->diffForHumans() }}</dd>
+            <label> Updated : </label>
+            <p> {{ $post->updated_at->diffForHumans() }}</p>
           </dl>
           <hr>
           <div class="row">
@@ -27,6 +31,11 @@
                   {{ Form::submit('Delete',['class'=>'btn btn-danger btn-block']) }}
                 {!! Form::close() !!}
 
+              </div>
+              <div class="col-sm-12">
+                <center>
+                  {!! Html::linkRoute('posts.index','<< See all shows',[],['class'=>'btn btn-default btn-block', 'style'=>'margin-top:20px']) !!}
+                </center>
               </div>
           </div>
       </div>

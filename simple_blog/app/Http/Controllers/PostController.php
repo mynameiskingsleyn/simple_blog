@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         //get all the Posts and store it in $post
-        $posts = Post::All();
+        $posts = Post::OrderBy('id','desc')->paginate(3);
         // return a view and pass $post
         return view('posts.index')->withPosts($posts);
     }
@@ -43,11 +43,14 @@ class PostController extends Controller
         // validate the data
         $this->validate($request,[
             'title' => 'required|max:60|min:5',
+            'slug' => 'required|min:5|max:60|alpha_dash|unique:posts,slug',
             'body' => 'required|min:10'
+
         ]);
         // store in the database..
         $post = new Post;
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->body = $request->body;
         $saved = $post->save();
         // redirect..
@@ -97,14 +100,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+       $post = Post::findOrFail($id);
         //validate data
-        $this->validate($request,[
-          'title' => 'required|max:60|min:5',
-          'body' => 'required|min:10'
-        ]);
+        if($request->slug == $post->slug){
+          $this->validate($request,[
+            'title' => 'required|max:60|min:5',
+            'body' => 'required|min:10',
+
+          ]);
+        }else{
+          $this->validate($request,[
+            'title' => 'required|max:60|min:5',
+            'body' => 'required|min:10',
+            'slug' => 'required|min:5|max:60|alpha_dash|unique:posts,slug',
+          ]);
+        }
+
         // save data to the database
-        $post = Post::findOrFail($id);
+
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->body = $request->body;
         $post->save();
         // set flash data with success message.

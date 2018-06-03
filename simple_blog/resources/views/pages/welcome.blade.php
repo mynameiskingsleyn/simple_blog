@@ -17,9 +17,9 @@
         <div class="post">
           <h3>{{ $post->title }}</h3>
           <p>
-            {{ substr($post->body,0,20) }} {{ strlen($post->body)>20 ? "...":""}}
+            {{ substr($post->body,0,20) }} {{ strlen($post->body)>20 ? "..." : ""}}
           </p>
-        <!--  { Html::linkRoute('pages.single','Read more', array($post->id),array('class'=>'btn btn-primary')) } -->
+         <a href="{{ url('blog/'.$post->slug) }}" class="btn btn-primary">Read more</a>
 
         </div>
       <hr>
